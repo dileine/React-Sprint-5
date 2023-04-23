@@ -1,5 +1,6 @@
 let joke: string;
-const button = document.querySelector('.button-joke');
+const button = document.querySelector('.button-joke')!;
+const jokeText = document.getElementById('joke-text')!;
 
 const getJoke = async () => 
 {
@@ -16,7 +17,8 @@ const getJoke = async () =>
     
 };
 
-button?.addEventListener('click', async()=>{
+button.addEventListener('click', async()=>{
     const joke = await getJoke();
     console.log(joke);
+    jokeText.textContent = joke;
 });

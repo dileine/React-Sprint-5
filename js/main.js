@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let joke;
 const button = document.querySelector('.button-joke');
+const jokeText = document.getElementById('joke-text');
 const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield fetch('https://icanhazdadjoke.com/', { headers: {
@@ -24,7 +25,8 @@ const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     ;
 });
-button === null || button === void 0 ? void 0 : button.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
+button.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
     const joke = yield getJoke();
     console.log(joke);
+    jokeText.textContent = joke;
 }));
