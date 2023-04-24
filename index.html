@@ -8,14 +8,46 @@
     <title>React: Sprint 5</title>
     <!--Styles-->
     <link rel="stylesheet" href="./css/styles.css" />
+    <!-- FontAwesome-->
+    <script
+      src="https://kit.fontawesome.com/a51db0f426.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div id="weather-icon">Avui: parcialment ennuvolat</div>
     <main>
       <section>
-        <h1>Preparat per riure?<span>&#x1F923;</span></h1>
-        <p id="joke-text"></p>
-        <button class="button-joke">Següent acudit</button>
+        <h1>Preparat per riure?<span>🤣</span></h1>
+        <p id="jokeText"></p>
+        <div>
+          <div class="score">
+            <button
+              style="display: none"
+              class="score-bttn"
+              onclick="jokeScore(1)"
+            >
+              😓
+            </button>
+            <button
+              style="display: none"
+              class="score-bttn"
+              onclick="jokeScore(2)"
+            >
+              😐
+            </button>
+            <button
+              style="display: none"
+              class="score-bttn"
+              onclick="jokeScore(3)"
+            >
+              😆
+            </button>
+          </div>
+          <button class="joke-bttn" onclick="showButtons()">
+            Següent acudit
+          </button>
+        </div>
       </section>
     </main>
     <script src="./js/main.js"></script>

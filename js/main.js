@@ -9,24 +9,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 let joke;
-const button = document.querySelector('.button-joke');
-const jokeText = document.getElementById('joke-text');
+const button = document.querySelector('.joke-bttn');
+const jokeText = document.getElementById('jokeText');
+const showButtons = () => {
+    const elements = document.querySelectorAll('.score-bttn');
+    elements.forEach((element) => {
+        element.style.display = 'block';
+    });
+};
+const reportJokes = [];
 const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield fetch('https://icanhazdadjoke.com/', { headers: {
                 Accept: 'application/json'
             }
         });
-        const joke = yield response.json();
-        return joke.joke;
+        const data = yield response.json();
+        joke = data.joke;
+        return data.joke;
     }
     catch (err) {
         console.error("sorry there was an error, try again");
     }
     ;
+    showButtons();
 });
 button.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
     const joke = yield getJoke();
     console.log(joke);
     jokeText.textContent = joke;
 }));
+const jokeScore = (score) => __awaiter(void 0, void 0, void 0, function* () {
+    let report = {
+        joke: joke,
+        score: score,
+        date: new Date().toISOString(),
+    };
+    reportJokes.push(report);
+    console.table(reportJokes);
+});

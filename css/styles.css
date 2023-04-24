@@ -69,7 +69,28 @@ p {
   padding-bottom: 10rem;
 }
 
-.button-joke {
+/* Buttons */
+
+button {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  cursor: pointer;
+}
+
+.score {
+  display: flex;
+  justify-content: space-around;
+  height: 3rem;
+  margin-bottom: 8rem;
+}
+
+.score-bttn {
+  border: none;
+  font-size: 7rem;
+}
+
+.joke-bttn {
   padding: 5rem 8.5rem;
   font-size: 6rem;
   color: white;
