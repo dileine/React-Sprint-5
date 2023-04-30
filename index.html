@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Mar López" />
+    <title>React: Sprint 5</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <!-- FontAwesome-->
+    <script
+      src="https://kit.fontawesome.com/a51db0f426.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!--Weather info-->
+    <header>
+      <nav>
+        <div id="showWeather"></div>
+      </nav>
+    </header>
+
+    <!-- Jokes container-->
+    <main>
+      <section>
+        <h1>Preparat per riure?<span>🤣</span></h1>
+        <p id="jokeText"></p>
+        <div>
+          <div class="score">
+            <button
+              style="display: none"
+              class="score-bttn"
+              onclick="jokeScore(1)"
+            >
+              😓
+            </button>
+            <button
+              style="display: none"
+              class="score-bttn"
+              onclick="jokeScore(2)"
+            >
+              😐
+            </button>
+            <button
+              style="display: none"
+              class="score-bttn"
+              onclick="jokeScore(3)"
+            >
+              😆
+            </button>
+          </div>
+          <button class="joke-bttn" onclick="showButtons()">
+            Següent acudit
+          </button>
+        </div>
+      </section>
+    </main>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
