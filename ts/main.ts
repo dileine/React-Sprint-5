@@ -4,7 +4,9 @@ const jokeText = document.getElementById('jokeText')!;
 
 const reportJokes: { joke: string; score: number; date: string; }[] =[];
 
-// get API jokes
+// get API 
+
+    //dad jokes
 
 const getJoke = async () => 
 {
@@ -18,14 +20,31 @@ const getJoke = async () =>
      joke = data.joke;
        return data.joke;
     } catch(err)
-    {console.error("sorry there was an error, try again")
+    {console.error("Unable to fetch data. Please try again")
     };
     showButtons();
 
 };
 
+        //Chuck Norris jokes
+
+const getJoke2 = async() => {
+    try{
+        const response = await fetch('https://api.chucknorris.io/jokes/random');
+        const data = await response.json();
+        const joke = data.value;
+        return joke;
+    } catch (err)
+    {console.error("Unable to fetch data. Please try again")
+};
+
+    showButtons();
+};
+
 button.addEventListener('click', async()=>{
-    const joke = await getJoke();
+    const useFirstAPI = Math.random() <0.5;
+    joke = useFirstAPI ?  await getJoke() : await getJoke2();
+
     console.log(joke);
     jokeText.textContent = joke;
 });
@@ -73,9 +92,6 @@ const jokeScore = async (score: number) => {
         }
         const data = await response.json();
         const temp = Math.round(data.main.temp);
-        //const iconUrl =`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
-        //const description = data.weather[0].description;
-       // const icon = `<img src="${iconUrl}" alt="${description}" class="weather-icon"/>`;
         showWeather.innerHTML = `${"Today"} | ${temp} ºC`;
     } catch (err){
         showWeather.innerHTML = "Error: Unable to fetch weather data";

@@ -12,7 +12,8 @@ let joke;
 const button = document.querySelector('.joke-bttn');
 const jokeText = document.getElementById('jokeText');
 const reportJokes = [];
-// get API jokes
+// get API 
+//dad jokes
 const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield fetch('https://icanhazdadjoke.com/', { headers: {
@@ -24,13 +25,28 @@ const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
         return data.joke;
     }
     catch (err) {
-        console.error("sorry there was an error, try again");
+        console.error("Unable to fetch data. Please try again");
+    }
+    ;
+    showButtons();
+});
+//Chuck Norris jokes
+const getJoke2 = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield fetch('https://api.chucknorris.io/jokes/random');
+        const data = yield response.json();
+        const joke = data.value;
+        return joke;
+    }
+    catch (err) {
+        console.error("Unable to fetch data. Please try again");
     }
     ;
     showButtons();
 });
 button.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
-    const joke = yield getJoke();
+    const useFirstAPI = Math.random() < 0.5;
+    joke = useFirstAPI ? yield getJoke() : yield getJoke2();
     console.log(joke);
     jokeText.textContent = joke;
 }));
@@ -71,9 +87,6 @@ function getWeather(position) {
             }
             const data = yield response.json();
             const temp = Math.round(data.main.temp);
-            //const iconUrl =`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
-            //const description = data.weather[0].description;
-            // const icon = `<img src="${iconUrl}" alt="${description}" class="weather-icon"/>`;
             showWeather.innerHTML = `${"Today"} | ${temp} ºC`;
         }
         catch (err) {
