@@ -11,13 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 let joke;
 const button = document.querySelector('.joke-bttn');
 const jokeText = document.getElementById('jokeText');
-const showButtons = () => {
-    const elements = document.querySelectorAll('.score-bttn');
-    elements.forEach((element) => {
-        element.style.display = 'block';
-    });
-};
 const reportJokes = [];
+// get API jokes
 const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield fetch('https://icanhazdadjoke.com/', { headers: {
@@ -39,6 +34,13 @@ button.addEventListener('click', () => __awaiter(void 0, void 0, void 0, functio
     console.log(joke);
     jokeText.textContent = joke;
 }));
+// Jokes score buttons
+const showButtons = () => {
+    const elements = document.querySelectorAll('.score-bttn');
+    elements.forEach((element) => {
+        element.style.display = 'block';
+    });
+};
 const jokeScore = (score) => __awaiter(void 0, void 0, void 0, function* () {
     let report = {
         joke: joke,
@@ -48,3 +50,35 @@ const jokeScore = (score) => __awaiter(void 0, void 0, void 0, function* () {
     reportJokes.push(report);
     console.table(reportJokes);
 });
+// get API Weather 
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(getWeather);
+}
+;
+getLocation();
+function getWeather(position) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const showWeather = document.getElementById('showWeather');
+        const { latitude: lat, longitude: lon } = position.coords;
+        const key = '00ada020714eeff9dcb90dfa0d069f89';
+        const lang = 'ca';
+        const units = 'metric';
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=${units}&lang=${lang}`;
+        try {
+            const response = yield fetch(url);
+            if (!response.ok) {
+                throw new Error('Unable to fetch weather data');
+            }
+            const data = yield response.json();
+            const temp = Math.round(data.main.temp);
+            //const iconUrl =`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+            //const description = data.weather[0].description;
+            // const icon = `<img src="${iconUrl}" alt="${description}" class="weather-icon"/>`;
+            showWeather.innerHTML = `${"Today"} | ${temp} ºC`;
+        }
+        catch (err) {
+            showWeather.innerHTML = "Error: Unable to fetch weather data";
+            console.log(err);
+        }
+    });
+}

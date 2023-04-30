@@ -25,14 +25,19 @@ body {
   background-size: cover;
 }
 
-#weather-icon {
+#showWeather {
   display: inline-block;
   white-space: nowrap;
   line-height: 20rem;
   align-self: start;
   margin-left: 4rem;
-  font-size: 5rem;
+  font-size: 8rem;
   font-weight: bold;
+}
+
+.weather-icon {
+  width: 46px;
+  height: 46px;
 }
 
 main {
